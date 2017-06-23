@@ -19,5 +19,6 @@ help verify
 
 # Usefull ressources
 
+- http://docs.spring.io/spring-security-kerberos/docs/current/reference/htmlsingle/
 - https://tomcat.apache.org/tomcat-8.5-doc/windows-auth-howto.html
-
+- https://seenukarthi.com/security/2014/08/13/localhost-authentication-spring-kerberos/

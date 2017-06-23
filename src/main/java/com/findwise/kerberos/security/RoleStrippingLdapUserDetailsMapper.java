@@ -7,7 +7,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsMapper;
 
 /**
+ * RoleStrippingLdapUserDetailsMapper:
+ *
+ * This class overwrites a crucial part of the standard spring LdapUserDetailsMapper,
+ * so we can strip the standard LDAP full name role into the descriptive CN name.
+ *
+ * This is a convenience class for simplifying the writing of the security configuration
+ * in SpringSecurityConfig
+ *
  * @author Peter Gylling - email: peter.jorgensen@findwise.com
+ *
+ * @see org.springframework.security.ldap.userdetails.LdapUserDetailsMapper
+ * @see com.findwise.kerberos.config.SpringSecurityConfig
  */
 public class RoleStrippingLdapUserDetailsMapper extends LdapUserDetailsMapper {
 
@@ -25,9 +36,9 @@ public class RoleStrippingLdapUserDetailsMapper extends LdapUserDetailsMapper {
      * </p>
      *
      * The role typically looks like this:
-     *  - CN=APP-PS2-USER,OU=PINTDEV Security Groups,DC=pintdev,DC=local
+     *  - CN=APP-USER,OU=DEV Security Groups,DC=dev,DC=local
      *  - and will be stripped and returned as
-     *  - ROLE_APP-PS2-USER as used in the SpringSecurityConfig class
+     *  - ROLE_APP-USER as used in the SpringSecurityConfig class
      *
      * @param role the attribute returned from
      * @return the authority to be added to the list of authorities for the user, or null

@@ -15,7 +15,11 @@ import org.springframework.context.annotation.Configuration;
  * - It's important to disable the auto configuration of Spring Security
  * - It's initialized if the SecurityAutoConfiguration.class is not excluded
  *
+ * A side effect here is, that you must provide you own login page as the
+ * default from Spring Security basic is not available.
+ *
  * @author Peter Gylling - email: peter.jorgensen@findwise.com
+ * @see com.findwise.kerberos.controller.ProtectedResourceController
  */
 @Configuration
 @EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
