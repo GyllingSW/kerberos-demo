@@ -37,9 +37,8 @@ public class KrbTest {
         final Map<String, String> optionMap = new HashMap<String, String>();
 
         if (propertiesFileName == null) {
-            //optionMap.put("ticketCache", "/tmp/krb5cc_1000");
-            optionMap.put("keyTab", "e:\\svc_findwise.keytab");
-            optionMap.put("principal", "HTTP/pidvpcpejo.pintdev.local@PINTDEV.LOCAL"); // default realm
+            optionMap.put("keyTab", "e:\\svc_user.keytab");
+            optionMap.put("principal", "HTTP/server.dev.local@DEV.LOCAL"); // default realm
 
             optionMap.put("doNotPrompt", "true");
             optionMap.put("refreshKrb5Config", "true");
