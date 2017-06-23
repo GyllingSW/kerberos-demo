@@ -7,7 +7,7 @@ import org.springframework.security.kerberos.authentication.sun.GlobalSunJaasKer
 
 
 /**
- * Created by pidpejo72 on 14-06-2017.
+ * @author Peter Gylling - email: peter.jorgensen@findwise.com
  */
 @Configuration
 public class KerberosGlobalConfig {

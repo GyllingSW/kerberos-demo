@@ -1,7 +1,7 @@
 package com.findwise.kerberos;
 
 /**
- * Created by pidpejo72 on 14-06-2017.
+ * @author Peter Gylling - email: peter.jorgensen@findwise.com
  */
 
 import com.sun.security.auth.module.Krb5LoginModule;

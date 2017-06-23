@@ -1,6 +1,5 @@
 package com.findwise.kerberos.config;
 
-import com.findwise.kerberos.security.DummyDetailsService;
 import com.findwise.kerberos.security.RoleStrippingLdapUserDetailsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,9 +50,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${app.ldap-role-attribute}")
     private String ldapRoleAttribute;
-
-    @Autowired
-    DummyDetailsService dummyDetailsService;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {

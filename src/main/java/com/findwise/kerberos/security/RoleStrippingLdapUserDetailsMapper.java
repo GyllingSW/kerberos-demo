@@ -7,7 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsMapper;
 
 /**
- * Created by pidpejo72_dev on 23-06-2017.
+ * @author Peter Gylling - email: peter.jorgensen@findwise.com
  */
 public class RoleStrippingLdapUserDetailsMapper extends LdapUserDetailsMapper {
 

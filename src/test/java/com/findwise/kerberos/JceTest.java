@@ -4,7 +4,7 @@ import javax.crypto.Cipher;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by pidpejo72_dev on 16-06-2017.
+ * @author Peter Gylling - email: peter.jorgensen@findwise.com
  */
 public class JceTest {
 

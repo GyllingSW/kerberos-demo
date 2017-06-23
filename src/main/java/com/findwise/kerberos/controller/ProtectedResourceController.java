@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by pidpejo72 on 01-06-2017.
+ * @author Peter Gylling - email: peter.jorgensen@findwise.com
  */
 @Controller
 public class ProtectedResourceController {

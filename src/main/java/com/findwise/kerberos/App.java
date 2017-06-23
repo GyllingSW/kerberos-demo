@@ -9,8 +9,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Hello world!
+ * SpringBootApplication:
  *
+ * !! NOTE - Kerberos configuration trick #1 !!
+ * - It's important to disable the auto configuration of Spring Security
+ * - It's initialized if the SecurityAutoConfiguration.class is not excluded
+ *
+ * @author Peter Gylling - email: peter.jorgensen@findwise.com
  */
 @Configuration
 @EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
