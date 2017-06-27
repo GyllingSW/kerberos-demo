@@ -34,9 +34,6 @@ successfully perform the following steps you are good to go:
 As there is so many steps required for a successfull login to happen I have provided a debug log.
   - See: DebugLog.md
 
-
-
-
 # Java Cryptography Extention (JCE)
 To get up and running, the JRE/JDK running this application must
 be enhanced with the US export restricted crypto package.
@@ -53,6 +50,12 @@ the version of the Spring Boot Maven plugin must be <= 1.4.2.RELEASE
 
 If you encounter this bug, the Spring Security setup can't find the
 login page, thus nothing works....
+
+# Credit to Karthikeyan Vaithilingam
+
+Karthikeyan Vaithilingam wrote an excellent blog about how to configure kerberos for localhost
+access - The code in this project is almost identical, with minor changes to adapt to Spring Security Java configuration
+instead of the old XML based configuration.
 
 # Usefull ressources
 

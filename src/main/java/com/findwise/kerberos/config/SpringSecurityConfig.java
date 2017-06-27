@@ -1,5 +1,7 @@
 package com.findwise.kerberos.config;
 
+import com.findwise.kerberos.localhost.LocalhostAuthFilter;
+import com.findwise.kerberos.localhost.LocalhostAuthProvider;
 import com.findwise.kerberos.security.RoleStrippingLdapUserDetailsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,9 +77,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .permitAll()
                     .and()
-                .addFilterBefore(
+                .addFilterAt(
                         spnegoAuthenticationProcessingFilter(authenticationManagerBean()),
                         BasicAuthenticationFilter.class
+                )
+                .addFilterBefore(
+                        localhostAuthFilter(authenticationManagerBean()),
+                                BasicAuthenticationFilter.class
                 );
     }
 
@@ -89,8 +95,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth,
+                                   LocalhostAuthProvider localhostAuthProvider,
                                    KerberosServiceAuthenticationProvider kerbServiceProvider) {
         auth
+                .authenticationProvider(localhostAuthProvider)
                 .authenticationProvider(kerbServiceProvider);
     }
 
@@ -109,6 +117,37 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+
+    /**
+     * LocalhostAuthProvider:
+     * Provided with the username from the LocalAuthFilter the LocalhostAuthProvider
+     * calls Ldap and extracts the roles of the current user.
+     *
+     * @return a configured localhost auth provider
+     */
+    @Bean
+    public LocalhostAuthProvider localhostAuthProvider() {
+        LocalhostAuthProvider localhostAuthProvider = new LocalhostAuthProvider();
+        localhostAuthProvider.setUserDetailsService(ldapUserDetailsService());
+        return localhostAuthProvider;
+    }
+
+    /**
+     * LocalhostAuthFilter:
+     * Graps the SPNEGO request before the Kerberos based SPNEGO authentication filter
+     * and shortcuts the system to allow for local users. (The developer use cae).
+     *
+     * @param authenticationManager - Standard Spring Security
+     * @return a configured LocalHostAuth filter.
+     */
+    @Bean
+    public LocalhostAuthFilter localhostAuthFilter(AuthenticationManager authenticationManager) {
+        LocalhostAuthFilter localhostAuthFilter = new LocalhostAuthFilter();
+        localhostAuthFilter.setAuthenticationManager(authenticationManager);
+        return localhostAuthFilter;
+    }
+
 
     /**
      * Setup SpnegoEntryPoint to point to the login
