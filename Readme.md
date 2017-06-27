@@ -17,6 +17,23 @@ help verify
  - JceTest - verifies full crypto support
  - KrbTest - verifies if your keytab file is usable
 
+# Java Cryptography Extention (JCE)
+To get up and running, the JRE/JDK running this application must
+be enhanced with the US export restricted crypto package.
+
+Grap your copy here:
+- http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
+
+# Spring Boot bug
+In version 1.4.3.RELEASE of the Spring Boot Maven plugin there is
+introduced a packaging bug. To run this application as a fat jar
+the version of the Spring Boot Maven plugin must be <= 1.4.2.RELEASE
+
+ - See: https://github.com/spring-projects/spring-boot/issues/8324
+
+If you encounter this bug, the Spring Security setup can't find the
+login page, thus nothing works....
+
 # Usefull ressources
 
 - http://docs.spring.io/spring-security-kerberos/docs/current/reference/htmlsingle/

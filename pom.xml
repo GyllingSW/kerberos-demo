@@ -15,7 +15,8 @@
         <java.version>1.7</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring.boot.version>1.5.3.RELEASE</spring.boot.version>
+        <spring.boot.version>1.5.4.RELEASE</spring.boot.version>
+        <spring.boot.maven.plugin.version>1.4.2.RELEASE</spring.boot.maven.plugin.version>
         <tomcat.embedded.version>8.5.15</tomcat.embedded.version>
         <jstl.version>1.2</jstl.version>
         <junit.version>4.12</junit.version>
@@ -125,7 +126,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring.boot.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
