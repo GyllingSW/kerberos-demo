@@ -15,14 +15,12 @@
         <java.version>1.7</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring.boot.version>1.5.4.RELEASE</spring.boot.version>
-        <spring.boot.maven.plugin.version>1.4.2.RELEASE</spring.boot.maven.plugin.version>
-        <tomcat.embedded.version>8.5.15</tomcat.embedded.version>
+        <spring.boot.version>1.5.22.RELEASE</spring.boot.version>
+        <spring.security.kerberos.version>1.0.1.RELEASE</spring.security.kerberos.version>
+        <spring.security.ldap.version>4.2.13.RELEASE</spring.security.ldap.version>
+        <tomcat.embedded.version>8.5.43</tomcat.embedded.version>
         <jstl.version>1.2</jstl.version>
-        <junit.version>4.12</junit.version>
-        <waffle.version>1.8.3</waffle.version>
-        <jna.version>4.4.0</jna.version>
-        <guava.version>22.0</guava.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -75,22 +73,52 @@
         <dependency>
             <groupId>org.springframework.security.kerberos</groupId>
             <artifactId>spring-security-kerberos-core</artifactId>
-            <version>1.0.1.RELEASE</version>
+            <version>${spring.security.kerberos.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.security</groupId>
+                    <artifactId>spring-security-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security.kerberos</groupId>
             <artifactId>spring-security-kerberos-client</artifactId>
-            <version>1.0.1.RELEASE</version>
+            <version>${spring.security.kerberos.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security.kerberos</groupId>
             <artifactId>spring-security-kerberos-web</artifactId>
-            <version>1.0.1.RELEASE</version>
+            <version>${spring.security.kerberos.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.security</groupId>
+                    <artifactId>spring-security-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-ldap</artifactId>
-            <version>4.2.3.RELEASE</version>
+            <version>${spring.security.ldap.version}</version>
         </dependency>
 
         <!-- JSP -->
@@ -126,7 +154,8 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.maven.plugin.version}</version>
+                <!--<version>${spring.boot.maven.plugin.version}</version>-->
+                <version>${spring.boot.version}</version>
                 <executions>
                     <execution>
                         <goals>
