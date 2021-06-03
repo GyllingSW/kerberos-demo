@@ -29,7 +29,7 @@ public class KrbTest {
         System.out.println(System.getProperty("java.version"));
 
         System.setProperty("sun.security.krb5.debug", "true");
-        System.setProperty("java.security.krb5.conf", "E:\\WORK\\kerberos-demo\\src\\test\\resources\\kerberos.conf");
+        System.setProperty("java.security.krb5.conf", "C:\\_kerberos\\kerberos.conf");
 
         final Subject subject = new Subject();
 
@@ -37,8 +37,8 @@ public class KrbTest {
         final Map<String, String> optionMap = new HashMap<String, String>();
 
         if (propertiesFileName == null) {
-            optionMap.put("keyTab", "e:\\svc_user.keytab");
-            optionMap.put("principal", "HTTP/server.dev.local@DEV.LOCAL"); // default realm
+            optionMap.put("keyTab", "C:\\_kerberos\\svc_pintdev_3676.keytab");
+            optionMap.put("principal", "HTTP/pintdev-3676.pintdev.local@PINTDEV.LOCAL"); // default realm
 
             optionMap.put("doNotPrompt", "true");
             optionMap.put("refreshKrb5Config", "true");

@@ -4,7 +4,7 @@
 
     <groupId>com.findwise.kerberos</groupId>
     <artifactId>demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>demo</name>
@@ -12,15 +12,17 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring.boot.version>1.5.22.RELEASE</spring.boot.version>
-        <spring.security.kerberos.version>1.0.1.RELEASE</spring.security.kerberos.version>
-        <spring.security.ldap.version>4.2.13.RELEASE</spring.security.ldap.version>
-        <tomcat.embedded.version>8.5.43</tomcat.embedded.version>
+        <spring.boot.version>2.3.11.RELEASE</spring.boot.version>
+        <spring.framework.version>5.2.15.RELEASE</spring.framework.version>
+        <spring.security.version>5.3.9.RELEASE</spring.security.version>
+        <tomcat.embedded.version>9.0.46</tomcat.embedded.version>
+        <javax.servlet.version>4.0.1</javax.servlet.version>
         <jstl.version>1.2</jstl.version>
         <junit.version>4.13.2</junit.version>
+        <junit-jupiter.version>5.6.3</junit-jupiter.version>
     </properties>
 
     <dependencyManagement>
@@ -35,14 +37,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <repositories>
-        <repository>
-            <id>repository.spring.release</id>
-            <name>Spring GA Repository</name>
-            <url>http://repo.spring.io/release</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <!-- Setup dependencies for Spring Boot -->
@@ -69,7 +63,31 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- Kerb4j Kerberos security -->
+        <dependency>
+            <groupId>com.kerb4j</groupId>
+            <artifactId>kerb4j-client</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kerb4j</groupId>
+            <artifactId>kerb4j-server-spring-security</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kerb4j</groupId>
+            <artifactId>kerb4j-server-spring-security-ldap</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+
         <!-- Kerberos security -->
+        <!--
         <dependency>
             <groupId>org.springframework.security.kerberos</groupId>
             <artifactId>spring-security-kerberos-core</artifactId>
@@ -115,11 +133,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
-            <version>${spring.security.ldap.version}</version>
-        </dependency>
+        -->
 
         <!-- JSP -->
         <dependency>
@@ -154,7 +168,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--<version>${spring.boot.maven.plugin.version}</version>-->
                 <version>${spring.boot.version}</version>
                 <executions>
                     <execution>
