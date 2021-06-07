@@ -3,10 +3,7 @@ package com.findwise.kerberos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * SpringBootApplication:
@@ -21,9 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Peter Gylling - email: peter.jorgensen@findwise.com
  * @see com.findwise.kerberos.controller.ProtectedResourceController
  */
-@Configuration
-@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
-@ComponentScan
+@SpringBootApplication
 public class App {
     private final static Logger log = LoggerFactory.getLogger(App.class);
 

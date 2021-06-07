@@ -12,19 +12,37 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.7</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring.boot.version>1.5.22.RELEASE</spring.boot.version>
-        <spring.security.kerberos.version>1.0.1.RELEASE</spring.security.kerberos.version>
-        <spring.security.ldap.version>4.2.13.RELEASE</spring.security.ldap.version>
-        <tomcat.embedded.version>8.5.43</tomcat.embedded.version>
+        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
+        <waffle.jna.version>3.0.0</waffle.jna.version>
+        <jna.version>5.6.0</jna.version>
+        <tomcat.embedded.version>9.0.46</tomcat.embedded.version>
         <jstl.version>1.2</jstl.version>
-        <junit.version>4.13.2</junit.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.github.waffle</groupId>
+                <artifactId>waffle-spring-boot-starter2</artifactId>
+                <version>${waffle.jna.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Resolve conflict between WAFFLE and Spring Boot dependency version by forcing jna version -->
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>${jna.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna-platform</artifactId>
+                <version>${jna.version}</version>
+            </dependency>
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -47,6 +65,11 @@
     <dependencies>
         <!-- Setup dependencies for Spring Boot -->
         <dependency>
+            <groupId>com.github.waffle</groupId>
+            <artifactId>waffle-spring-boot-starter2</artifactId>
+            <version>${waffle.jna.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring.boot.version}</version>
@@ -57,68 +80,15 @@
             <version>${spring.boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <version>${spring.boot.version}</version>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- Kerberos security -->
-        <dependency>
-            <groupId>org.springframework.security.kerberos</groupId>
-            <artifactId>spring-security-kerberos-core</artifactId>
-            <version>${spring.security.kerberos.version}</version>
+            <groupId>com.github.waffle</groupId>
+            <artifactId>waffle-jna</artifactId>
+            <version>${waffle.jna.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-core</artifactId>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.kerberos</groupId>
-            <artifactId>spring-security-kerberos-client</artifactId>
-            <version>${spring.security.kerberos.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.kerberos</groupId>
-            <artifactId>spring-security-kerberos-web</artifactId>
-            <version>${spring.security.kerberos.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-web</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
-            <version>${spring.security.ldap.version}</version>
         </dependency>
 
         <!-- JSP -->
@@ -137,13 +107,14 @@
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-devtools</artifactId>
             <version>${spring.boot.version}</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
     </dependencies>
