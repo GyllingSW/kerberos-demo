@@ -4,9 +4,9 @@ import com.findwise.kerberos.localhost.LocalhostAuthFilter;
 import com.findwise.kerberos.localhost.LocalhostAuthProvider;
 import com.findwise.kerberos.security.RoleStrippingLdapUserDetailsMapper;
 import com.kerb4j.client.SpnegoClient;
+import com.kerb4j.common.jaas.sun.Krb5LoginContext;
 import com.kerb4j.server.spring.*;
 import com.kerb4j.server.spring.jaas.sun.SunJaasKerberosTicketValidator;
-import com.kerb4j.server.spring.ldap.KerberosLdapContextSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -216,13 +216,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-//    @Bean
-//    public KerberosAuthenticationProvider kerberosAuthenticationProvider() {
-//        KerberosAuthenticationProvider provider = new KerberosAuthenticationProvider();
-//        provider.setUserDetailsService(ldapUserDetailsService());
-//        return provider;
-//    }
-
     /**
      * SunJaasKerberosTicketValidator
      *
@@ -251,33 +244,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //     * @return a configured KerberosLdapContext
 //     */
 //    @Bean
-//    public KerberosLdapContextSource kerberosLdapContextSource() {
-//        KerberosLdapContextSource contextSource = new KerberosLdapContextSource(adServer);
-//        contextSource.setSpnegoClient(SpnegoClient.loginWithKeyTab(servicePrincipal, keytabLocation));
-//        return contextSource;
+//    public Krb5LoginContext krb5LoginContext() {
+//        Krb5LoginContext krb5LoginContext = Krb5LoginContext.loginWithKeyTab(servicePrincipal,keytabLocation);
+//        return krb5LoginContext;
 //    }
-
-//    /**
-//     * SunJaasKrb5LoginConfig
-//     *
-//     * This is what you would previously find in a JAAS Conf file.
-//     *
-//     * Find the servicePrincipal and keytabLocation is application.properties
-//     *
-//     * @return a configured JAAS login
-//     * @see SunJaasKrb5LoginConfig
-//     */
-//    @Bean
-//    public SunJaasKrb5LoginConfig loginConfig() {
-//        SunJaasKrb5LoginConfig loginConfig = new SunJaasKrb5LoginConfig();
-//        loginConfig.setKeyTabLocation(new FileSystemResource(keytabLocation));
-//        loginConfig.setServicePrincipal(servicePrincipal);
-//        loginConfig.setDebug(true);
-//        loginConfig.setIsInitiator(true);
-//        loginConfig.setUseTicketCache(true);
-//        return loginConfig;
-//    }
-
+//
+//
 //    /**
 //     * LdapUserDetailsService:
 //     *
@@ -293,13 +265,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //     */
 //    @Bean
 //    public LdapUserDetailsService ldapUserDetailsService() {
+//        Krb5LoginContext krb5LoginContext = Krb5LoginContext.loginWithKeyTab(servicePrincipal,keytabLocation);
 //        FilterBasedLdapUserSearch userSearch =
-//                new FilterBasedLdapUserSearch(ldapSearchBase, ldapSearchFilter, kerberosLdapContextSource());
+//                new FilterBasedLdapUserSearch(ldapSearchBase, ldapSearchFilter, krb5LoginContext);
 //        LdapUserDetailsService service = new LdapUserDetailsService(userSearch);
 //        service.setUserDetailsMapper(ldapUserDetailsMapper());
 //        return service;
 //    }
-
+//
 //    /**
 //     * !! NOTE - Kerberos configuration trick #5 !!
 //     * When an AD acts as LDAP the actual roles, that the user is granted

@@ -77,6 +77,11 @@
         </dependency>
         <dependency>
             <groupId>com.kerb4j</groupId>
+            <artifactId>kerb4j-common</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kerb4j</groupId>
             <artifactId>kerb4j-server-spring-security</artifactId>
             <version>0.1.1</version>
         </dependency>
